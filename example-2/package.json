@@ -1,0 +1,16 @@
+{
+  "name": "nodejs-learning",
+  "version": "1.0.0",
+  "description": "Обработка повторяющихся событий с генераторами событий",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2"
+  }
+}
