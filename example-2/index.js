@@ -1,28 +1,17 @@
-const events = require("events");
-const net = require("net");
+const Watcher = require("./Watcher");
+const fs = require("fs");
 
-const channel = new events.EventEmitter();
+const watchDir = "./watchDir";
+const processedDir = "./processedDir";
 
-channel.clients = {};
-channel.subscriptions = {};
+const watcher = new Watcher(watchDir, processedDir);
 
-channel.on("join", function (id, client) {
-  this.clients[id] = client;
-  this.subscriptions[id] = (senderld, message) => {
-    if (id != senderld) {
-      this.clients[id].write(message);
-    }
-  };
-  this.on("broadcast", this.subscriptions[id]);
-});
-
-const server = net.createServer((client) => {
-  const id = `${client.remoteAddress}:${client.remotePort}`;
-  channel.emit("join", id, client);
-  client.on("data", (data) => {
-    data = data.toString();
-    channel.emit("broadcast", id, data);
+watcher.on("process", (file) => {
+  const watchFile = `${watchDir}/${file}`;
+  const processedFile = `${processedDir}/${file.toLowerCase()}`;
+  fs.rename(`${file}`, `${file}_repl`, (err) => {
+    if (err) throw err;
   });
 });
 
-server.listen(8888);
+watcher.start();
