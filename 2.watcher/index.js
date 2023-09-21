@@ -9,7 +9,8 @@ const watcher = new Watcher(watchDir, processedDir);
 watcher.on("process", (file) => {
   const watchFile = `${watchDir}/${file}`;
   const processedFile = `${processedDir}/${file.toLowerCase()}`;
-  fs.rename(`${file}`, `${file}_repl`, (err) => {
+  console.log(`.${watchFile.split(".")[1]}.ts`);
+  fs.rename(watchFile, processedFile, (err) => {
     if (err) throw err;
   });
 });
