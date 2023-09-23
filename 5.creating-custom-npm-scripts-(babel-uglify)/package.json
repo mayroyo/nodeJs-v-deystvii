@@ -1,0 +1,22 @@
+{
+  "name": "5.creating-custom-npm-scripts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "babel": "./node_modules/.bin/babel browser.js -d build/",
+    "uglify": "./node_modules/.bin/uglifyjs build/browser.js -o build/browser.min.js",
+    "build": "npm run babel && npm run uglify"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.22.15",
+    "@babel/core": "^7.22.20",
+    "@babel/preset-env": "^7.22.20",
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "uglify-es": "^3.3.9"
+  }
+}
